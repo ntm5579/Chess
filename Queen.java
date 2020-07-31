@@ -1,8 +1,3 @@
-package app;
-
-/**
- * Queen
- */
 public class Queen extends Piece{
 
   
@@ -36,6 +31,24 @@ public class Queen extends Piece{
         else{
             System.out.print("  " + "\u265B" + " ");
         }
+    }
+
+    public void addToJLabel(){
+        if(teamColor.equals("white")){
+            Board.fullBoard += "\u2655";
+        }
+        else{
+            Board.fullBoard += "\u265B";
+        }
+    }
+
+    @Override
+    public String toString(){
+        if(teamColor.equals("white"))
+            return "\u2655";
+        
+        else
+            return "\u265B";
     }
 
     //edits Board.boardspaces with new local of the piece

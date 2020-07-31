@@ -1,39 +1,34 @@
-package app;
-
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Player {
     //variables
     public String teamColor;
-    public final String playerName;
+    public String playerName;
     public static Player[] order = new Player[2];
-    private Scanner scanMove;
+    public static String move;
 
     //construtors
     public Player(String assignName) {
         playerName = assignName;
-        if(order[0] == this){
-            teamColor = "black";
-        }
-        else
-            teamColor = "white";
-    }
+        if(order[0] == this)teamColor = "black";
+        else teamColor = "white";}
     
     //methods
 	public String getTeamColor() {return teamColor;}
 
     public void setTeamColor(String newTeamColor) {this.teamColor = newTeamColor;}
     
+    public void setPlayerName(String newPlayerName) {this.playerName = newPlayerName;}
+
+    //make a "move" string variable that takes the input for the players moves that are typed into the box
+    
     public void takeTurn(){
         App.currPlayer = this;
-        scanMove = new Scanner(System.in);
-        String move = scanMove.nextLine();
-        //puts user output into Arraylist
+        //puts user output into Arraylist to determine if the move is valid
         ArrayList<String> letters = new ArrayList<String>();
         for(int i = 0; i < move.length(); i++){
             letters.add(move.substring(i, i + 1).toLowerCase());}
-        //splits the input into parts to put in arguments
+        //splits the input into parts to put in arguments for valid move checks
         String [] input = new String [5];
         int lowerlimit = 0;
         int stage = 0;

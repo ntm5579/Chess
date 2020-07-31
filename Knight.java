@@ -1,8 +1,3 @@
-package app;
-
-/**
- * Knight
- */
 public class Knight extends Piece{
 
     public Knight(String teamName, int x, int y, int moveRangeLR, int moveRangeUD) {
@@ -25,6 +20,24 @@ public class Knight extends Piece{
         else{
             System.out.print("  " + "\u265E" + " ");
         }
+    }
+
+    public void addToJLabel(){
+        if(teamColor.equals("white")){
+            Board.fullBoard += "\u2658";
+        }
+        else{
+            Board.fullBoard += "\u265E";
+        }
+    }
+
+    @Override
+    public String toString(){
+        if(teamColor.equals("white"))
+            return "\u2658";
+        
+        else
+            return "\u265E";
     }
 
     //edits Board.boardspaces with new local of the piece

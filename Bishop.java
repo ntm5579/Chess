@@ -1,8 +1,4 @@
-package app;
 
-/**
- * Bishop
- */
 public class Bishop extends Piece{
 
     public Bishop(final String teamName, final int x, final int y, final int moveRangeLR, final int moveRangeUD) {
@@ -26,6 +22,24 @@ public class Bishop extends Piece{
         else{
             System.out.print("  " + "\u265D" + " ");
         }
+    }
+
+    public void addToJLabel(){
+        if(teamColor.equals("white")){
+            Board.fullBoard += "\u2657";
+        }
+        else{
+            Board.fullBoard += "\u265D";
+        }
+    }
+
+    @Override
+    public String toString(){
+        if(teamColor.equals("white"))
+            return "\u2657";
+        
+        else
+            return "\u265D";
     }
     
     //edits Board.boardspaces with new local of the piece

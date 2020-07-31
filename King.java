@@ -1,5 +1,3 @@
-package app;
-
 public class King extends Piece{
 
     public static int [] kingcoords = new int[4];
@@ -34,6 +32,24 @@ public class King extends Piece{
         else{
             System.out.print("  " + "\u265A" + " ");
         }
+    }
+
+    public void addToJLabel(){
+        if(teamColor.equals("white")){
+            Board.fullBoard += "\u2654";
+        }
+        else{
+            Board.fullBoard += "\u265A";
+        }
+    }
+
+    @Override
+    public String toString(){
+        if(teamColor.equals("white"))
+            return "\u2654";
+        
+        else
+            return "\u265A";
     }
 
     //edits Board.boardspaces with new local of the piece

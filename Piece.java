@@ -1,5 +1,3 @@
-package app;
-
 public class Piece extends Player{
 
     public int x , moveRangeLR, moveRangeUD;
@@ -55,6 +53,10 @@ public class Piece extends Player{
         //needs to be implimented for each piece to print out the character from the java 
         System.out.println();
 
+    }
+
+    public void addToJLabel(){
+        //does nothing
     }
 
     public void removePiece(int x, int y){

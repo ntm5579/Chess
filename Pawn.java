@@ -1,8 +1,3 @@
-package app;
-
-/**
- * Pawn
- */
 public class Pawn extends Piece{
 
     public Pawn(String teamName, int x, int y, int moveRangeLR, int moveRangeUD) {
@@ -34,6 +29,24 @@ public class Pawn extends Piece{
         else{
             System.out.print("  " + "\u265F" + " ");
         }
+    }
+
+    public void addToJLabel(){
+        if(teamColor.equals("white")){
+            Board.fullBoard += "\u2659";
+        }
+        else{
+            Board.fullBoard += "\u265F";
+        }
+    }
+
+    @Override
+    public String toString(){
+        if(teamColor.equals("white"))
+            return "\u2659";
+        
+        else
+            return "\u265F";
     }
     
     //edits Board.boardspaces with new local of the piece

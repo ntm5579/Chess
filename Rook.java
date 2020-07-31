@@ -1,8 +1,3 @@
-package app;
-
-/**
- * Rook
- */
 public class Rook extends Piece{
 
     public Rook(String teamName, int x, int y, int moveRangeLR, int moveRangeUD) {
@@ -29,6 +24,24 @@ public class Rook extends Piece{
         else{
             System.out.print("  " + "\u265C" + " ");
         }
+    }
+
+    public void addToJLabel(){
+        if(teamColor.equals("white")){
+            Board.fullBoard += "\u2656";
+        }
+        else{
+            Board.fullBoard += "\u265C";
+        }
+    }
+
+    @Override
+    public String toString(){
+        if(teamColor.equals("white"))
+            return "\u2656";
+        
+        else
+            return "\u265C";
     }
 
     //edits Board.boardspaces with new local of the piece

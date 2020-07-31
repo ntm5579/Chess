@@ -1,7 +1,7 @@
-package app;
 
 public class Board {
     public static Piece[][] boardSpaces = new Piece[8][];
+    public static String fullBoard;
     
     //puts all of the pieces in their starting places
     public static void initBoard(){
@@ -52,7 +52,7 @@ public class Board {
         boardSpaces[7] = whitePieceRow;
     }
 
-    //will display the board
+    //will display the board in the console
     public static void print(){
         System.out.print("      (0) (1) (2) (3) (4) (5) (6) (7)");
         for(int r = 0; r < Board.boardSpaces.length; r++){
@@ -67,8 +67,27 @@ public class Board {
         }
     }
     
+    //used to see if a king is in check, if it is that will alter the turn loop so that the player has to move out of check
     public static boolean checkCheck(){
         return ((King) Board.boardSpaces[King.kingcoords[1]][King.kingcoords[0]]).checkCheck(King.kingcoords[0],King.kingcoords[1]);
+    }
+
+    //takes the elements and formats them as a string for the jlabel for display in the jframe
+    public static String boardToJLabel(){
+        fullBoard = "";
+        fullBoard += "      (0) (1) (2) (3) (4) (5) (6) (7)";
+        for(int r = 0; r < Board.boardSpaces.length; r++){
+            fullBoard += " (" + Piece.spaceNames[r] + ") ";
+            for(int c = 0; c < Board.boardSpaces[0].length; c++){
+                if(Board.boardSpaces[r][c] !=  null)
+                    Board.boardSpaces[r][c].addToJLabel();
+                else
+                    //change
+                    System.out.print("  ");
+            }
+        }
+
+        return fullBoard;
     }
     
 }

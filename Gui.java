@@ -1,26 +1,20 @@
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 
 import javax.imageio.ImageIO;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 
 public class Gui implements ActionListener {
+    //setup components
     private JFrame frame;
     private JPanel startPanel;
     private JLabel player1Label;
@@ -28,9 +22,13 @@ public class Gui implements ActionListener {
     private JTextField player1Text;
     private JTextField player2Text;
     private JButton confirmButton;
-
     String player1name;
     String player2name;
+
+    //display and second phase components
+    JLabel boardLabel = new JLabel();
+    JPanel gamePanel;
+    JTextField moveBox;
 
     public Gui() throws InterruptedException {
         frame = new JFrame();
@@ -79,36 +77,48 @@ public class Gui implements ActionListener {
         startPanel.add(confirmButton);
 
         frame.setVisible(true);
-        // end of the first panel
+        //setup panel complete
 
-        // changing to a different panel
-        /*
-         * frame.setVisible(false); frame.setSize(300, 200); TimeUnit.SECONDS.sleep(10);
-         * frame.remove(test1); frame.add(test2);
-         */
+        //game panel setup
+        gamePanel = new JPanel();
+        moveBox = new JTextField();
+        //gamePanel.add(confirmButton);
+        gamePanel.add(boardLabel);
+        frame.add(gamePanel);
 
-        // this.setText(""); to print out the chess board data
 
-        frame.setVisible(true);
-        // end of the second panel
     }
 
     public static void main(String[] args) throws InterruptedException {
         new Gui();
-
     }
 
     public void actionPerformed(ActionEvent e){
-        player1name = player1Text.getText();
-        player2name = player2Text.getText();
-        
-        //testing string collection
-        System.out.println(player1name);
-        System.out.println(player2name);
+        if(startPanel.isVisible()){
+            App.playerOne.setPlayerName(player1Text.getText());
+            App.playerTwo.setPlayerName(player2Text.getText());
 
-        //frame change tests
-        frame.setSize(600, 200);
-        player1Label.setVisible(false);
-        player2Label.setVisible(false);
+            //frame change tests
+            frame.setSize(600, 600);
+            startPanel.setVisible(false);
+            /*
+            player1Label.setVisible(false);
+            player2Label.setVisible(false);
+            nameConfirm.setVisible(false);
+            */
+            gamePanel.add(confirmButton);
+            confirmButton.setBounds(500, 500, 80, 35);
+            boardLabel.setText("Hello, this is the game board");
+            boardLabel.setBounds(20, 20, 400, 400);
+            gamePanel.setVisible(true);
+        }
+        else if(gamePanel.isVisible()){
+            confirmButton.setVisible(false);
+            Player.move = moveBox.getText();
+            boardLabel.setText(Board.boardToJLabel());
+            
+
+            //Board JLabel update has to happen when a move is confirmed
+        }
     }
 }
