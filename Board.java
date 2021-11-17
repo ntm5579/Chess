@@ -1,6 +1,6 @@
 
 public class Board {
-    public static Piece[][] boardSpaces = new Piece[8][];
+    public static Piece[][] boardSpaces = new Piece[8][8];
     public static String fullBoard;
     
     //puts all of the pieces in their starting places
@@ -74,16 +74,16 @@ public class Board {
 
     //takes the elements and formats them as a string for the jlabel for display in the jframe
     public static String boardToJLabel(){
-        fullBoard = "";
-        fullBoard += "      (0) (1) (2) (3) (4) (5) (6) (7)";
+        fullBoard = "      (0)-(1)-(2)-(3)-(4)-(5)-(6)-(7)";
         for(int r = 0; r < Board.boardSpaces.length; r++){
-            fullBoard += " (" + Piece.spaceNames[r] + ") ";
+            fullBoard += "\n (" + Piece.spaceNames[r] + ") ";
             for(int c = 0; c < Board.boardSpaces[0].length; c++){
-                if(Board.boardSpaces[r][c] !=  null)
+                if(Board.boardSpaces[r][c] !=  null){
                     Board.boardSpaces[r][c].addToJLabel();
-                else
+                    fullBoard += "  ";}
+                else{
                     //change
-                    System.out.print("  ");
+                    fullBoard += "     ";}
             }
         }
 

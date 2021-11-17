@@ -3,13 +3,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 import javax.imageio.ImageIO;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
-import java.awt.Image;
+//import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ public class Gui implements ActionListener {
     String player2name;
 
     //display and second phase components
-    JLabel boardLabel = new JLabel();
+    JTextArea boardArea = new JTextArea();
     JPanel gamePanel;
     JTextField moveBox;
 
@@ -37,6 +38,8 @@ public class Gui implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Chess");
         frame.setResizable(false);
+        boardArea.setEditable(false);
+        boardArea.setHighlighter(null);
 
         frame.add(startPanel);
 
@@ -49,9 +52,10 @@ public class Gui implements ActionListener {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
 
+    public String[] nameWindow(){
         // ui for setting names
-
         player1Label = new JLabel("Player 1: ");
         player1Label.setBounds(15, 20, 80, 25);
         startPanel.add(player1Label);
@@ -77,16 +81,27 @@ public class Gui implements ActionListener {
         startPanel.add(confirmButton);
 
         frame.setVisible(true);
-        //setup panel complete
+        
+        //figure out how to get the output of the boxes
+        String[] names = {"test", "not taking textbox input"};
+        return names;
+    }
 
+    public void gameWindowSetup(){
         //game panel setup
+        //confirmButton.setBounds(500, 500, 80, 35);
         gamePanel = new JPanel();
-        moveBox = new JTextField();
-        //gamePanel.add(confirmButton);
-        gamePanel.add(boardLabel);
         frame.add(gamePanel);
+        gamePanel.setVisible(false);
+        gamePanel.add(boardArea);
+        
+        moveBox = new JTextField();
+        moveBox.setBounds(20, 500, 40, 160);
+        gamePanel.add(moveBox);
 
-
+        boardArea.setBounds(20, 20, 400, 400);
+        boardArea.setText(Board.boardToJLabel());
+        boardArea.setFont(boardArea.getFont().deriveFont(24.0f));
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -98,24 +113,15 @@ public class Gui implements ActionListener {
             App.playerOne.setPlayerName(player1Text.getText());
             App.playerTwo.setPlayerName(player2Text.getText());
 
-            //frame change tests
+            //frame change
             frame.setSize(600, 600);
             startPanel.setVisible(false);
-            /*
-            player1Label.setVisible(false);
-            player2Label.setVisible(false);
-            nameConfirm.setVisible(false);
-            */
-            gamePanel.add(confirmButton);
-            confirmButton.setBounds(500, 500, 80, 35);
-            boardLabel.setText("Hello, this is the game board");
-            boardLabel.setBounds(20, 20, 400, 400);
+
+            //Player.move = moveBox.getText();
             gamePanel.setVisible(true);
         }
         else if(gamePanel.isVisible()){
-            confirmButton.setVisible(false);
-            Player.move = moveBox.getText();
-            boardLabel.setText(Board.boardToJLabel());
+
             
 
             //Board JLabel update has to happen when a move is confirmed

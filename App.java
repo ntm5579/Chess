@@ -1,10 +1,10 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class App {
     public static Board make;
     public static Player currPlayer;
     public static String gameState = "prep";
-    //static may break them
+    //static may break the players, they were not desinged this way but were switched
     public static Player playerOne;
     public static Player playerTwo;
 
@@ -14,15 +14,19 @@ public class App {
         System.out.println();
 
         Gui gamewindow = new Gui();
+        String[] names = gamewindow.nameWindow();
 
-        playerOne = new Player(null);
+        //Players need name assignments?
+        playerOne = new Player(names[0]);
         Player.order[0] = playerOne;
         playerOne.setTeamColor("black");
         System.out.println();
         System.out.println("Name Player Two: ");
-        playerTwo = new Player(null);
+        playerTwo = new Player(names[1]);
         Player.order[1] = playerTwo;
         playerTwo.setTeamColor("white");
+
+        gamewindow.gameWindowSetup();
 
         //player info
         System.out.println(Player.order[1].playerName + ": " + Player.order[1].getTeamColor());

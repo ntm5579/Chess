@@ -23,6 +23,7 @@ public class Player {
     //make a "move" string variable that takes the input for the players moves that are typed into the box
     
     public void takeTurn(){
+        //find a way to not trigger this method until the confirm button has been hit again
         App.currPlayer = this;
         //puts user output into Arraylist to determine if the move is valid
         ArrayList<String> letters = new ArrayList<String>();
