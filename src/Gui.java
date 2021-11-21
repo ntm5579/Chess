@@ -56,7 +56,7 @@ public class Gui implements ActionListener {
 
 
         try {
-            window.setIconImage(ImageIO.read(new File("ChessIcon.jpg")));
+            window.setIconImage(ImageIO.read(new File("assets/ChessIcon.jpg")));
         } 
         catch (IOException e) {
             e.printStackTrace();
@@ -121,6 +121,9 @@ public class Gui implements ActionListener {
         //game panel setup
         gamePanel = new JPanel();
         gamePanel.setLayout(new GridBagLayout());
+
+        JFrame boardFrame = new JFrame();
+        boardFrame.setLayout(new GridBagLayout());
 
         int gridsize = 10;
         JComponent[][] gameComponents = new JComponent[gridsize][gridsize];
