@@ -1,7 +1,7 @@
 public class Knight extends Piece{
 
-    public Knight(String teamName, int x, int y, int moveRangeLR, int moveRangeUD) {
-        super(teamName, x, y, moveRangeLR, moveRangeUD, "Knight");
+    public Knight(int x, int y, int moveRangeLR, int moveRangeUD) {
+        super(x, y, moveRangeLR, moveRangeUD, "Knight");
     }
     
     public boolean validMove(int newx, String newy){

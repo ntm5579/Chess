@@ -2,8 +2,8 @@ public class King extends Piece{
 
     public static int [] kingcoords = new int[4];
 
-    public King(final String teamName, final int x, final int y, final int moveRangeLR, final int moveRangeUD) {
-        super(teamName, x, y, moveRangeLR, moveRangeUD, "King");
+    public King(final int x, final int y, final int moveRangeLR, final int moveRangeUD) {
+        super( x, y, moveRangeLR, moveRangeUD, "King");
     }
 
     public boolean checkCheck(int x, int y){

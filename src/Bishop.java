@@ -1,7 +1,7 @@
 public class Bishop extends Piece{
 
-    public Bishop(final String teamName, final int x, final int y, final int moveRangeLR, final int moveRangeUD) {
-        super(teamName, x, y, moveRangeLR, moveRangeUD, "Bishop");
+    public Bishop(final int x, final int y, final int moveRangeLR, final int moveRangeUD) {
+        super(x, y, moveRangeLR, moveRangeUD, "Bishop");
     }
 
     public boolean validMove(int newx, String newy){
