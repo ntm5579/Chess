@@ -1,4 +1,3 @@
-
 public class Bishop extends Piece{
 
     public Bishop(final String teamName, final int x, final int y, final int moveRangeLR, final int moveRangeUD) {

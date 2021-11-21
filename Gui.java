@@ -7,26 +7,33 @@ import javax.swing.JTextArea;
 import javax.swing.JComponent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.Font;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
-//import java.awt.Image;
-//import java.io.File;
-//import java.io.IOException;
-//import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Gui implements ActionListener {
     //setup components
-    private JFrame window;
-    private JPanel startPanel;
+    private static JFrame window;
+    private static JPanel startPanel;
     private JLabel player1Label;
     private JLabel player2Label;
     private JTextField player1Text;
     private JTextField player2Text;
     private JButton confirmButton;
+    private static Font myFont = new Font("Default", Font.BOLD, 25);
+    private static Color BoardBrown = new Color(80,40,30);
+    private static Color White = new Color(255,255,255);
     String player1name;
     String player2name;
+
+    public static void themer(JComponent component){
+        component.setFont(myFont);
+    }
 
     //display and second phase components
     JTextArea boardArea = new JTextArea();
@@ -47,14 +54,14 @@ public class Gui implements ActionListener {
 
         startPanel.setLayout(null);
 
-        // changes the icon on the jframe window, does not work for some reason
-        /*
+
         try {
             window.setIconImage(ImageIO.read(new File("ChessIcon.jpg")));
         } 
         catch (IOException e) {
             e.printStackTrace();
-        } */
+        }
+
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -96,16 +103,17 @@ public class Gui implements ActionListener {
 
     GridBagConstraints gbc = new GridBagConstraints();
     public GridBagConstraints gbcManager(GridBagConstraints gbc, int r, int c){
-        System.out.println("GBC.gridx before: " + gbc.gridx + ", GBC.gridy before: " + gbc.gridy);
+        //System.out.println("GBC.gridx before: " + gbc.gridx + ", GBC.gridy before: " + gbc.gridy);
         
         gbc.gridx = c;
         gbc.gridy = r;
         //should be a way to do this once
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
+        
         //----------------------
 
-        System.out.println("GBC.gridx after: " + gbc.gridx + ", GBC.gridy after: " + gbc.gridy);
+        //System.out.println("GBC.gridx after: " + gbc.gridx + ", GBC.gridy after: " + gbc.gridy);
         return gbc;
     }
 
@@ -113,7 +121,7 @@ public class Gui implements ActionListener {
         //game panel setup
         gamePanel = new JPanel();
         gamePanel.setLayout(new GridBagLayout());
-        window.add(gamePanel);
+
         int gridsize = 10;
         JComponent[][] gameComponents = new JComponent[gridsize][gridsize];
         for(int r = 0; r < gridsize; r++){
@@ -136,6 +144,22 @@ public class Gui implements ActionListener {
                     else{
                         row[c] = new JButton("    ");
                     }
+                    if (r % 2 == 0){
+                        if(c % 2 == 0){
+                            row[c].setBackground(White);
+                        }
+                        else{
+                            row[c].setBackground(BoardBrown);
+                        }
+                    }
+                    else{
+                        if(c % 2 == 0){
+                            row[c].setBackground(BoardBrown);
+                        }
+                        else{
+                            row[c].setBackground(White);
+                        }
+                    }
                 }
             }
             gameComponents[r] = row;
@@ -143,6 +167,7 @@ public class Gui implements ActionListener {
         for(int r = 0; r < gridsize; r++){
             for(int c = 0; c < gridsize; c++){
                 gamePanel.add(gameComponents[r][c], gbcManager(gbc, r, c));
+                themer(gameComponents[r][c]);
             }
         }
     }
@@ -157,6 +182,7 @@ public class Gui implements ActionListener {
             startPanel.setVisible(false);
 
             //Player.move = moveBox.getText();
+            window.add(gamePanel);
             gamePanel.setVisible(true);
         }
         else if(gamePanel.isVisible()){

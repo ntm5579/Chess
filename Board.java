@@ -1,4 +1,3 @@
-
 public class Board {
     public static Piece[][] boardSpaces = new Piece[8][8];
     public static String fullBoard;

@@ -1,5 +1,3 @@
-//import java.util.Scanner;
-
 public class App {
     public static Board make;
     public static Player currPlayer;
@@ -64,4 +62,6 @@ public class App {
         }
         */
     }
+    
+    //impliment a loop that lets you play again, maybe add a start screen
 }
