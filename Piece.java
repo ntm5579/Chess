@@ -49,14 +49,14 @@ public class Piece extends Player{
     //https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode for the unicode characters of chess pieces
 
     public void print(){
-        //nothing happens
-        //needs to be implimented for each piece to print out the character from the java 
         System.out.println();
-
     }
-
     public void addToJLabel(){
         //does nothing
+    }
+
+    public String getString(){
+        return "";
     }
 
     public void removePiece(int x, int y){

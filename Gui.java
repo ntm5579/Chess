@@ -4,19 +4,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
-
-import javax.imageio.ImageIO;
+import javax.swing.JComponent;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 //import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
+//import java.io.File;
+//import java.io.IOException;
+//import javax.imageio.ImageIO;
 
 public class Gui implements ActionListener {
     //setup components
-    private JFrame frame;
+    private JFrame window;
     private JPanel startPanel;
     private JLabel player1Label;
     private JLabel player2Label;
@@ -32,26 +34,31 @@ public class Gui implements ActionListener {
     JTextField moveBox;
 
     public Gui() throws InterruptedException {
-        frame = new JFrame();
+        window = new JFrame();
         startPanel = new JPanel();
-        frame.setSize(300, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Chess");
-        frame.setResizable(false);
+        window.setSize(300, 200);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setTitle("Chess");
+        window.setResizable(false);
         boardArea.setEditable(false);
         boardArea.setHighlighter(null);
 
-        frame.add(startPanel);
+        window.add(startPanel);
 
         startPanel.setLayout(null);
 
-        // changes the icon on the jframe window
+        // changes the icon on the jframe window, does not work for some reason
+        /*
         try {
-            frame.setIconImage(ImageIO.read(new File("ChessIcon.jpg")));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+            window.setIconImage(ImageIO.read(new File("ChessIcon.jpg")));
+        } 
+        catch (IOException e) {
             e.printStackTrace();
-        }
+        } */
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        new Gui();
     }
 
     public String[] nameWindow(){
@@ -80,32 +87,64 @@ public class Gui implements ActionListener {
         confirmButton.setBorderPainted(false);
         startPanel.add(confirmButton);
 
-        frame.setVisible(true);
+        window.setVisible(true);
         
         //figure out how to get the output of the boxes
         String[] names = {"test", "not taking textbox input"};
         return names;
     }
 
-    public void gameWindowSetup(){
-        //game panel setup
-        //confirmButton.setBounds(500, 500, 80, 35);
-        gamePanel = new JPanel();
-        frame.add(gamePanel);
-        gamePanel.setVisible(false);
-        gamePanel.add(boardArea);
+    GridBagConstraints gbc = new GridBagConstraints();
+    public GridBagConstraints gbcManager(GridBagConstraints gbc, int r, int c){
+        System.out.println("GBC.gridx before: " + gbc.gridx + ", GBC.gridy before: " + gbc.gridy);
         
-        moveBox = new JTextField();
-        moveBox.setBounds(20, 500, 40, 160);
-        gamePanel.add(moveBox);
+        gbc.gridx = c;
+        gbc.gridy = r;
+        //should be a way to do this once
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        //----------------------
 
-        boardArea.setBounds(20, 20, 400, 400);
-        boardArea.setText(Board.boardToJLabel());
-        boardArea.setFont(boardArea.getFont().deriveFont(24.0f));
+        System.out.println("GBC.gridx after: " + gbc.gridx + ", GBC.gridy after: " + gbc.gridy);
+        return gbc;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        new Gui();
+    public void gameWindowSetup(){
+        //game panel setup
+        gamePanel = new JPanel();
+        gamePanel.setLayout(new GridBagLayout());
+        window.add(gamePanel);
+        int gridsize = 10;
+        JComponent[][] gameComponents = new JComponent[gridsize][gridsize];
+        for(int r = 0; r < gridsize; r++){
+            JComponent[] row = new JComponent[gridsize];
+            for(int c = 0; c < gridsize; c++){
+                if(r == 0 || r == gridsize - 1){
+                    if(c == 0 || c == gridsize - 1){
+                        row[c] = new JLabel("");
+                    }
+                    else{
+                        row[c] = new JLabel(Character.toString((char) c + 96));
+                    }
+                }
+                else if(r!= 0 && (c == 0 || c == row.length - 1)){
+                    row[c] = new JLabel(String.valueOf(gridsize - 1 - r));
+                }
+                else{
+                    if(Board.boardSpaces[r - 1][c - 1] != null)
+                        row[c] = new JButton(Board.boardSpaces[r - 1][c - 1].toString());
+                    else{
+                        row[c] = new JButton("    ");
+                    }
+                }
+            }
+            gameComponents[r] = row;
+        }
+        for(int r = 0; r < gridsize; r++){
+            for(int c = 0; c < gridsize; c++){
+                gamePanel.add(gameComponents[r][c], gbcManager(gbc, r, c));
+            }
+        }
     }
 
     public void actionPerformed(ActionEvent e){
@@ -114,7 +153,7 @@ public class Gui implements ActionListener {
             App.playerTwo.setPlayerName(player2Text.getText());
 
             //frame change
-            frame.setSize(600, 600);
+            window.setSize(600, 600);
             startPanel.setVisible(false);
 
             //Player.move = moveBox.getText();

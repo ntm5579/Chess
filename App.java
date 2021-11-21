@@ -13,6 +13,8 @@ public class App {
         System.out.println("Hello, Welcome to Java Chess");
         System.out.println();
 
+        Board.initBoard();
+
         Gui gamewindow = new Gui();
         String[] names = gamewindow.nameWindow();
 
@@ -32,8 +34,6 @@ public class App {
         System.out.println(Player.order[1].playerName + ": " + Player.order[1].getTeamColor());
         System.out.println(Player.order[0].playerName + ": " + Player.order[0].getTeamColor());
         
-        Board.initBoard();
-        
         currPlayer = playerTwo;
         gameState = "playing";
 
@@ -42,9 +42,11 @@ public class App {
         //need to change while loop to account for check happening between playertwo and playerone, needs to make sure the move won't put the king in check
         Board.print();
         Board.boardToJLabel();
+        /*
         while(gameState.equals("playing")){
             System.out.println();
             System.out.println(playerTwo.playerName + "'s turn.");
+
             playerTwo.takeTurn();
             //replacing with boardToJLabel
             //Board.print();
@@ -60,5 +62,6 @@ public class App {
             if(Board.checkCheck())
                 gameState = "check";
         }
+        */
     }
 }

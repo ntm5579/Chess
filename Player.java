@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Player {
     //variables
-    public String teamColor;
-    public String playerName;
+    public String teamColor; //stores the color of each object's teamColor
+    public String playerName; //name given to the player 'Nathan', used for saying who's turn it it
     public static Player[] order = new Player[2];
     public static String move;
 
@@ -18,6 +18,8 @@ public class Player {
 
     public void setTeamColor(String newTeamColor) {this.teamColor = newTeamColor;}
     
+    public String getPlayerName() {return playerName;}
+
     public void setPlayerName(String newPlayerName) {this.playerName = newPlayerName;}
 
     //make a "move" string variable that takes the input for the players moves that are typed into the box
@@ -69,7 +71,6 @@ public class Player {
         //*/
     }
 
-            
     //impliment a way to make sure that the pieces are on the board, should includes null protection
         
         
